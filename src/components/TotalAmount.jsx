@@ -8,17 +8,13 @@ export default function TotalAmount() {
   const { totalAmount, totalCount } = useDonations()
 
   return (
-    <section className="total-card">
-      <div className="total-flag" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-      </div>
+    <section className="panel total-card">
+      <div className="total-ornament" aria-hidden="true" />
       <p className="total-label">إجمالي التبرعات حتى الآن</p>
       <p className="total-value">
         <span className="total-number">{formatMoney(totalAmount)}</span>
-        <span className="total-currency">{config.currency}</span>
       </p>
+      <p className="total-currency">{config.currency}</p>
       <p className="total-count">
         {formatMoney(totalCount)} <span>تبرّع</span>
       </p>

@@ -30,13 +30,12 @@ export default function RecentDonors() {
     if (el) el.scrollTop = 0
   }, [donations.length, tick])
 
-  const recent = donations.slice(0, 12)
+  const recent = donations.slice(0, 20)
 
   return (
-    <section className="panel recent-panel">
-      <header className="panel-header recent-header">
-        <span className="live-badge" aria-hidden="true" />
-        <h2>آخر المتبرعين</h2>
+    <section className="panel">
+      <header className="panel-header">
+        <h2>آخر 20 متبرع</h2>
         <span className="live-dot">مباشر</span>
       </header>
       <div className="recent-list-wrap" ref={listRef}>
@@ -44,15 +43,15 @@ export default function RecentDonors() {
           {recent.map((donor, i) => (
             <li key={donor.id} className="recent-row">
               <span className="recent-seq">{String(i + 1).padStart(2, '0')}</span>
-              <div className="recent-info">
-                <span className="recent-name">{donor.name}</span>
-                {donor.note && <span className="recent-note">{donor.note}</span>}
+              <div className="row-info">
+                <span className="row-name">{donor.name}</span>
+                {donor.note && <span className="row-note">{donor.note}</span>}
               </div>
-              <div className="recent-side">
-                <span className="recent-amount">
+              <div className="row-side">
+                <span className="row-amount">
                   {formatMoney(donor.amount)} <small>{config.currency}</small>
                 </span>
-                <span className="recent-time">{formatTime(donor.created_at)}</span>
+                <span className="row-time">{formatTime(donor.created_at)}</span>
               </div>
             </li>
           ))}
