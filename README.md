@@ -47,7 +47,9 @@ git push -u origin main
 4. Framework Preset: **Vite** (سيُختار تلقائياً). اضغط **Deploy**.
 
 بعد النشر:
-- الشاشة الرئيسية: `https://your-project.vercel.app`
-- لوحة التحكم: `https://your-project.vercel.app/admin`
+- الشاشة الرئيسية: `https://hematayba.vercel.app`
+- لوحة التحكم: `https://hematayba.vercel.app/admin`
+
+> ملاحظة: مشروع Vercel يقرأ إعدادات إعادة التوجيه من ملف `vercel.json` (إعادة كل المسارات إلى `index.html` ليعمل توجيه React بشكل صحيح).
 
 > ملاحظة أمنية: `VITE_SUPABASE_ANON_KEY` هو مفتاح عام وليس سرياً؛ حماية الكتابة تتم عبر سياسات RLS (المشرف فقط يستطيع الإضافة بعد تسجيل الدخول).
