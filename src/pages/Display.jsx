@@ -5,6 +5,7 @@ import TopDonors from '../components/TopDonors'
 import LastDonorCard from '../components/LastDonorCard'
 import RecentDonors from '../components/RecentDonors'
 import QuranVerse from '../components/QuranVerse'
+import DonationCode from '../components/DonationCode'
 import { useDonations } from '../context/DonationsContext'
 import { config } from '../lib/config'
 
@@ -29,6 +30,7 @@ export default function Display() {
             <div className="col col-center">
               <TotalAmount />
               <h2 className="campaign-name">{config.campaignName}</h2>
+              <DonationCode />
             </div>
 
             <div className="col col-left">
