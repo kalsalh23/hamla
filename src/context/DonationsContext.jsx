@@ -47,7 +47,8 @@ export function DonationsProvider({ children }) {
     try {
       const { data, error } = await supabase.rpc('get_totals')
       if (error) throw error
-      if (data) setTotals(data)
+      const row = Array.isArray(data) ? data[0] : data
+      if (row) setTotals(row)
     } catch (e) {
       console.error('تعذّر جلب الإجماليات:', e.message)
     }
