@@ -159,7 +159,7 @@ export default function Admin({ user, onLogout }) {
           </section>
 
           <section className="form-card">
-            <h2>آخر التبرعات</h2>
+            <h2>جميع المتبرعين <span className="table-count">{donations.length}</span></h2>
             <div className="admin-table-wrap">
               <table className="admin-table">
                 <thead>
@@ -172,7 +172,7 @@ export default function Admin({ user, onLogout }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {ranked.slice(0, 20).map((d) => (
+                  {ranked.map((d) => (
                     <tr key={d.id}>
                       <td className="rank">{d.rank}</td>
                       <td>{d.name}</td>

@@ -1072,6 +1072,24 @@ body {
   font-weight: 800;
   color: var(--cream);
   margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.table-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: rgba(185, 167, 121, 0.16);
+  border: 1px solid rgba(185, 167, 121, 0.4);
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 800;
 }
 
 .form-feedback {
