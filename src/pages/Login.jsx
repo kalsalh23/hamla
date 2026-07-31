@@ -27,7 +27,7 @@ export default function Login({ onLogin }) {
   return (
     <div className="login-page">
       <form className="login-card" onSubmit={handleSubmit}>
-        <img src="/logo.svg" alt="شعار" className="login-logo" />
+        <img src="/logo.jpg" alt="شعار" className="login-logo" />
         <h1>لوحة التحكم</h1>
         <p className="login-sub">دخول مدير النظام · همة طيبة</p>
 

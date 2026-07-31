@@ -67,7 +67,7 @@ export default function Admin({ user, onLogout }) {
     <div className="admin-page">
       <header className="admin-header">
         <div className="admin-brand">
-          <img src="/logo.svg" alt="شعار" className="admin-logo" />
+          <img src="/logo.jpg" alt="شعار" className="admin-logo" />
           <div>
             <h1>لوحة تحكم {config.campaignName}</h1>
             <p>مرحباً، {user?.email}</p>

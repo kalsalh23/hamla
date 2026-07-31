@@ -830,6 +830,10 @@ body {
   width: 96px;
   height: 96px;
   margin-bottom: 12px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 2px solid rgba(185, 167, 121, 0.55);
+  background: var(--teal-deep);
 }
 
 .login-card h1 {
@@ -869,6 +873,11 @@ body {
 .admin-logo {
   width: 54px;
   height: 54px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid rgba(185, 167, 121, 0.55);
+  background: var(--teal-deep);
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.4));
 }
 
 .admin-brand h1 {
