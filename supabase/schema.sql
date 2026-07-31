@@ -58,3 +58,22 @@ create policy "allow delete for authenticated"
 -- 6) فهارس لتسريع الاستعلامات
 create index if not exists donations_amount_idx on public.donations (amount desc);
 create index if not exists donations_created_at_idx on public.donations (created_at desc);
+
+-- 7) دالة الإجماليات (تحسب الجمع في قاعدة البيانات نفسها
+--    لتكون صحيحة مهما زاد عدد التبرعات حتى بعد 1000+)
+create or replace function public.get_totals()
+returns table (total_count bigint, syp numeric, usd numeric, sar numeric)
+language sql
+security definer
+set search_path = public
+as $$
+  select
+    count(*)::bigint,
+    coalesce(sum(amount) filter (where currency = 'SYP'), 0),
+    coalesce(sum(amount) filter (where currency = 'USD'), 0),
+    coalesce(sum(amount) filter (where currency = 'SAR'), 0)
+  from public.donations;
+$$;
+
+revoke all on function public.get_totals() from public;
+grant execute on function public.get_totals() to anon, authenticated, service_role;
