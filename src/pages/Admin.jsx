@@ -59,8 +59,8 @@ export default function Admin({ user, onLogout }) {
     setConfirmDelete(null)
   }
 
-  const ranked = [...donations]
-    .sort((a, b) => Number(b.amount) - Number(a.amount))
+  const byDate = [...donations]
+    .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
     .map((d, i) => ({ ...d, rank: i + 1 }))
 
   return (
@@ -172,7 +172,7 @@ export default function Admin({ user, onLogout }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {ranked.map((d) => (
+                  {byDate.map((d) => (
                     <tr key={d.id}>
                       <td className="rank">{d.rank}</td>
                       <td>{d.name}</td>
