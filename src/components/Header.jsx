@@ -10,6 +10,7 @@ export default function Header() {
 
       <div className="sponsor">
         <span className="sponsor-line" aria-hidden="true" />
+        <img src="/sponsor-logo.jpg" alt="شعار الراعي الإعلامي" className="sponsor-logo" />
         <div className="sponsor-text">
           <span className="sponsor-label">الراعي الإعلامي</span>
           <span className="sponsor-name">طيبة الإمام الرسمية</span>

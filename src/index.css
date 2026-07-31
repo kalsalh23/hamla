@@ -88,6 +88,16 @@ body {
   gap: 12px;
 }
 
+.sponsor-logo {
+  width: clamp(40px, 6vw, 56px);
+  height: clamp(40px, 6vw, 56px);
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid rgba(185, 167, 121, 0.55);
+  background: var(--teal-deep);
+  box-shadow: var(--shadow);
+}
+
 .sponsor-line {
   width: clamp(20px, 5vw, 64px);
   height: 1px;
