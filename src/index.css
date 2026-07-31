@@ -74,6 +74,10 @@ body {
 .brand-logo {
   width: clamp(58px, 8vw, 74px);
   height: clamp(58px, 8vw, 74px);
+  object-fit: cover;
+  border-radius: 14px;
+  border: 2px solid rgba(185, 167, 121, 0.55);
+  background: var(--teal-deep);
   filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.45));
 }
 

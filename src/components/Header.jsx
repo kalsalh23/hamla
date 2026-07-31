@@ -7,7 +7,7 @@ export default function Header() {
         <h1 className="brand-title">{config.campaignName}</h1>
         <p className="brand-subtitle">{config.campaignSubtitle}</p>
       </div>
-      <img src="/logo.svg" alt="شعار الحملة" className="brand-logo" />
+      <img src="/logo.jpg" alt="شعار الحملة" className="brand-logo" />
     </header>
   )
 }
