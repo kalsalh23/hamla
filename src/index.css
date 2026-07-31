@@ -320,6 +320,66 @@ body {
   font-weight: 700;
 }
 
+/* قائمة أعلى المبالغ حسب العملة */
+.top-cur-list {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.top-cur-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(237, 235, 224, 0.05);
+  border: 1px solid rgba(185, 167, 121, 0.22);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.top-cur-badge {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: linear-gradient(140deg, rgba(185, 167, 121, 0.35), rgba(185, 167, 121, 0.12));
+  border: 1px solid rgba(185, 167, 121, 0.4);
+  color: #f0e6c8;
+  font-weight: 900;
+  font-size: 1.05rem;
+}
+
+.top-cur-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-cur-name {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-cur-label {
+  color: rgba(237, 235, 224, 0.6);
+  font-size: 0.78rem;
+}
+
+.top-cur-amount {
+  font-weight: 900;
+  font-size: 1.15rem;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
 /* ============ بطاقة الإجمالي ============ */
 .total-card {
   position: relative;

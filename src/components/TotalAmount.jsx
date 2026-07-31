@@ -2,7 +2,7 @@ import { useDonations } from '../context/DonationsContext'
 import { formatNumber } from '../lib/config'
 
 export default function TotalAmount() {
-  const { totalSYP, totalUSD, totalCount } = useDonations()
+  const { totalSYP, totalUSD, totalSAR, totalCount } = useDonations()
 
   return (
     <section className="panel total-card">
@@ -16,6 +16,10 @@ export default function TotalAmount() {
       <p className="total-amount-row">
         <span className="total-number">{formatNumber(totalUSD)}</span>
         <span className="total-currency">دولار أمريكي</span>
+      </p>
+      <p className="total-amount-row">
+        <span className="total-number">{formatNumber(totalSAR)}</span>
+        <span className="total-currency">ريال سعودي</span>
       </p>
 
       <p className="total-count">

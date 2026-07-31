@@ -7,6 +7,7 @@ export const config = {
 export const CURRENCIES = {
   SYP: { label: 'ليرة سورية', symbol: 'ل.س' },
   USD: { label: 'دولار أمريكي', symbol: '$' },
+  SAR: { label: 'ريال سعودي', symbol: 'ر.س' },
 }
 
 export const formatNumber = (value) =>

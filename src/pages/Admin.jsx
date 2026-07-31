@@ -4,7 +4,7 @@ import { supabase } from '../lib/supabase'
 import { config, CURRENCIES, formatNumber, formatAmount } from '../lib/config'
 
 export default function Admin({ user, onLogout }) {
-  const { donations, totalSYP, totalUSD, refetch } = useDonations()
+  const { donations, totalSYP, totalUSD, totalSAR, refetch } = useDonations()
   const [name, setName] = useState('')
   const [amount, setAmount] = useState('')
   const [currency, setCurrency] = useState('SYP')
@@ -85,6 +85,10 @@ export default function Admin({ user, onLogout }) {
           <div className="stat-card">
             <span>إجمالي الدولار</span>
             <strong>{formatNumber(totalUSD)} <small>$</small></strong>
+          </div>
+          <div className="stat-card">
+            <span>إجمالي الريال السعودي</span>
+            <strong>{formatNumber(totalSAR)} <small>ر.س</small></strong>
           </div>
           <div className="stat-card">
             <span>عدد التبرعات</span>
