@@ -6,6 +6,7 @@ import LastDonorCard from '../components/LastDonorCard'
 import RecentDonors from '../components/RecentDonors'
 import QuranVerse from '../components/QuranVerse'
 import DonationCode from '../components/DonationCode'
+import DeveloperInfo from '../components/DeveloperInfo'
 import { useDonations } from '../context/DonationsContext'
 import { config } from '../lib/config'
 
@@ -40,6 +41,7 @@ export default function Display() {
           </div>
         )}
         <QuranVerse />
+        <DeveloperInfo />
       </main>
     </div>
   )
