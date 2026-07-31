@@ -190,7 +190,7 @@ export default function Admin({ user, onLogout }) {
                       </td>
                     </tr>
                   ))}
-                  {ranked.length === 0 && (
+                  {byDate.length === 0 && (
                     <tr>
                       <td colSpan="5" className="empty-hint">لا توجد تبرعات بعد</td>
                     </tr>
