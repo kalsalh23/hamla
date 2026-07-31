@@ -20,7 +20,6 @@ export function DonationsProvider({ children }) {
         .from('donations')
         .select('*')
         .order('created_at', { ascending: false })
-        .limit(200)
 
       if (error) throw error
       setDonations(data || [])
@@ -42,7 +41,7 @@ export function DonationsProvider({ children }) {
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'donations' },
         (payload) => {
-          setDonations((prev) => [payload.new, ...prev].slice(0, 200))
+          setDonations((prev) => [payload.new, ...prev])
         },
       )
       .on(

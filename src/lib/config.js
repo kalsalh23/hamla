@@ -19,8 +19,13 @@ export const SYP_RATES = {
 export const toSYP = (value, currency) =>
   Number(value || 0) * (SYP_RATES[currency] || 1)
 
-export const formatNumber = (value) =>
-  new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(Math.round(Number(value || 0)))
+export const formatNumber = (value) => {
+  const n = Number(value || 0)
+  const hasFraction = Math.abs(n % 1) > 1e-9
+  return new Intl.NumberFormat('en-US', {
+    maximumFractionDigits: hasFraction ? 2 : 0,
+  }).format(n)
+}
 
 export const formatAmount = (value, currency = 'USD') => {
   const c = CURRENCIES[currency] || CURRENCIES.USD
