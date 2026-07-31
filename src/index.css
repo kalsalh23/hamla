@@ -642,6 +642,12 @@ body {
   white-space: nowrap;
 }
 
+.row-equivalent {
+  color: rgba(237, 235, 224, 0.55);
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
 .row-amount small {
   color: rgba(237, 235, 224, 0.55);
   font-weight: 400;
