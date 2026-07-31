@@ -1,8 +1,5 @@
 import { useDonations } from '../context/DonationsContext'
-import { config } from '../lib/config'
-
-const formatMoney = (value) =>
-  new Intl.NumberFormat('ar-SY', { maximumFractionDigits: 0 }).format(Math.round(Number(value || 0)))
+import { formatAmount } from '../lib/config'
 
 const MEDAL_RANK = ['gold', 'silver', 'bronze']
 
@@ -26,9 +23,7 @@ export default function TopDonors() {
               <span className="row-name">{donor.name}</span>
               {donor.note && <span className="row-note">{donor.note}</span>}
             </div>
-            <span className="row-amount">
-              {formatMoney(donor.amount)} <small>{config.currency}</small>
-            </span>
+            <span className="row-amount">{formatAmount(donor.amount, donor.currency)}</span>
           </li>
         ))}
         {top.length === 0 && <li className="empty-hint">لا توجد تبرعات بعد</li>}

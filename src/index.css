@@ -309,7 +309,7 @@ body {
 .total-number {
   display: block;
   margin-top: 10px;
-  font-size: clamp(3.2rem, 9vw, 5.4rem);
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
   font-weight: 900;
   line-height: 1;
   background: linear-gradient(130deg, #f0e6c8, var(--gold) 55%, var(--gold-dark));
@@ -319,8 +319,25 @@ body {
   text-shadow: 0 0 40px rgba(185, 167, 121, 0.25);
 }
 
-.total-currency {
+.total-amount-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.total-amount-row .total-number {
+  margin-top: 0;
+}
+
+.total-amount-row + .total-amount-row {
   margin-top: 6px;
+  padding-top: 6px;
+}
+
+.total-currency {
   color: rgba(237, 235, 224, 0.75);
   font-size: 0.95rem;
 }
@@ -710,6 +727,33 @@ body {
   font-family: inherit;
   font-size: 0.98rem;
   transition: border-color 0.2s;
+}
+
+.field-row {
+  display: flex;
+  gap: 10px;
+}
+
+.field-row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.currency-select {
+  padding: 0 14px;
+  border-radius: 11px;
+  border: 1px solid rgba(185, 167, 121, 0.3);
+  background: rgba(0, 38, 35, 0.5);
+  color: var(--cream);
+  font-family: inherit;
+  font-size: 0.92rem;
+  cursor: pointer;
+  max-width: 150px;
+}
+
+.currency-select:focus {
+  outline: none;
+  border-color: var(--gold);
 }
 
 .field input:focus {

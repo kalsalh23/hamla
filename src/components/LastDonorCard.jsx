@@ -1,8 +1,5 @@
 import { useDonations } from '../context/DonationsContext'
-import { config } from '../lib/config'
-
-const formatMoney = (value) =>
-  new Intl.NumberFormat('ar-SY', { maximumFractionDigits: 0 }).format(Math.round(Number(value || 0)))
+import { formatAmount } from '../lib/config'
 
 const formatTime = (iso) => {
   const diff = Math.max(0, Date.now() - new Date(iso).getTime())
@@ -39,8 +36,7 @@ export default function LastDonorCard() {
       <div className="donor-card-body">
         <p className="donor-card-name">{last.name}</p>
         <p className="donor-card-amount">
-          <span className="num">{formatMoney(last.amount)}</span>
-          <span className="unit">{config.currency}</span>
+          <span className="num">{formatAmount(last.amount, last.currency)}</span>
         </p>
         {last.note && <p className="donor-card-note">{last.note}</p>}
         <p className="donor-card-time">{formatTime(last.created_at)}</p>

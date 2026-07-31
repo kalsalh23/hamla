@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useDonations } from '../context/DonationsContext'
-import { config } from '../lib/config'
-
-const formatMoney = (value) =>
-  new Intl.NumberFormat('ar-SY', { maximumFractionDigits: 0 }).format(Math.round(Number(value || 0)))
+import { formatAmount } from '../lib/config'
 
 const formatTime = (iso) => {
   const diff = Math.max(0, Date.now() - new Date(iso).getTime())
@@ -48,9 +45,7 @@ export default function RecentDonors() {
                 {donor.note && <span className="row-note">{donor.note}</span>}
               </div>
               <div className="row-side">
-                <span className="row-amount">
-                  {formatMoney(donor.amount)} <small>{config.currency}</small>
-                </span>
+                <span className="row-amount">{formatAmount(donor.amount, donor.currency)}</span>
                 <span className="row-time">{formatTime(donor.created_at)}</span>
               </div>
             </li>

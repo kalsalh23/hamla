@@ -12,9 +12,15 @@ create table if not exists public.donations (
   id uuid primary key default gen_random_uuid(),
   name text not null,
   amount numeric(14, 2) not null check (amount > 0),
+  currency text not null default 'SYP' check (currency in ('SYP', 'USD')),
   note text default '',
   created_at timestamptz not null default now()
 );
+
+-- في حال كان الجدول موجوداً سابقاً (ترقية) أضف عمود العملة
+alter table public.donations add column if not exists currency text not null default 'SYP';
+alter table public.donations drop constraint if exists donations_currency_check;
+alter table public.donations add constraint donations_currency_check check (currency in ('SYP', 'USD'));
 
 -- 3) تفعيل الـ Realtime على الجدول (حتى تظهر التبرعات بشكل لحظي)
 alter publication supabase_realtime add table public.donations;

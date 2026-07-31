@@ -1,8 +1,5 @@
 import { useDonations } from '../context/DonationsContext'
-import { config } from '../lib/config'
-
-const formatMoney = (value) =>
-  new Intl.NumberFormat('ar-SY', { maximumFractionDigits: 0 }).format(Math.round(Number(value || 0)))
+import { formatAmount } from '../lib/config'
 
 export default function TopDonorCard() {
   const { donations } = useDonations()
@@ -31,8 +28,7 @@ export default function TopDonorCard() {
       <div className="donor-card-body">
         <p className="donor-card-name">{top.name}</p>
         <p className="donor-card-amount">
-          <span className="num">{formatMoney(top.amount)}</span>
-          <span className="unit">{config.currency}</span>
+          <span className="num">{formatAmount(top.amount, top.currency)}</span>
         </p>
         {top.note && <p className="donor-card-note">{top.note}</p>}
       </div>

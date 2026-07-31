@@ -69,11 +69,17 @@ export function DonationsProvider({ children }) {
   }, [fetchDonations])
 
   const totalAmount = donations.reduce((sum, d) => sum + Number(d.amount || 0), 0)
+  const totalSYP = donations
+    .filter((d) => d.currency !== 'USD')
+    .reduce((sum, d) => sum + Number(d.amount || 0), 0)
+  const totalUSD = donations
+    .filter((d) => d.currency === 'USD')
+    .reduce((sum, d) => sum + Number(d.amount || 0), 0)
   const totalCount = donations.length
 
   return (
     <DonationsContext.Provider
-      value={{ donations, loading, error, totalAmount, totalCount, refetch: fetchDonations }}
+      value={{ donations, loading, error, totalAmount, totalSYP, totalUSD, totalCount, refetch: fetchDonations }}
     >
       {children}
     </DonationsContext.Provider>

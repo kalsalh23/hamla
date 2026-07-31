@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useDonations } from '../context/DonationsContext'
 import { supabase } from '../lib/supabase'
-import { config } from '../lib/config'
-
-const formatMoney = (value) =>
-  new Intl.NumberFormat('ar-SY', { maximumFractionDigits: 0 }).format(Math.round(Number(value || 0)))
+import { config, CURRENCIES, formatNumber, formatAmount } from '../lib/config'
 
 export default function Admin({ user, onLogout }) {
-  const { donations, totalAmount, refetch } = useDonations()
+  const { donations, totalSYP, totalUSD, refetch } = useDonations()
   const [name, setName] = useState('')
   const [amount, setAmount] = useState('')
+  const [currency, setCurrency] = useState('SYP')
   const [note, setNote] = useState('')
   const [saving, setSaving] = useState(false)
   const [feedback, setFeedback] = useState(null)
@@ -34,11 +32,13 @@ export default function Admin({ user, onLogout }) {
       const { error } = await supabase.from('donations').insert({
         name: name.trim(),
         amount: amt,
+        currency,
         note: note.trim(),
       })
       if (error) throw error
       setName('')
       setAmount('')
+      setCurrency('SYP')
       setNote('')
       setFeedback({ type: 'success', text: 'تمت إضافة التبرّع ونشره على الشاشة مباشرةً' })
     } catch (err) {
@@ -79,16 +79,16 @@ export default function Admin({ user, onLogout }) {
       <main className="admin-main">
         <section className="admin-stats">
           <div className="stat-card">
-            <span>الإجمالي</span>
-            <strong>{formatMoney(totalAmount)} <small>{config.currency}</small></strong>
+            <span>إجمالي الليرة السورية</span>
+            <strong>{formatNumber(totalSYP)} <small>ل.س</small></strong>
+          </div>
+          <div className="stat-card">
+            <span>إجمالي الدولار</span>
+            <strong>{formatNumber(totalUSD)} <small>$</small></strong>
           </div>
           <div className="stat-card">
             <span>عدد التبرعات</span>
             <strong>{donations.length}</strong>
-          </div>
-          <div className="stat-card">
-            <span>أعلى تبرّع</span>
-            <strong>{formatMoney(ranked[0]?.amount || 0)} <small>{config.currency}</small></strong>
           </div>
         </section>
 
@@ -111,17 +111,31 @@ export default function Admin({ user, onLogout }) {
               </label>
 
               <label className="field">
-                <span>مبلغ التبرّع ({config.currency}) *</span>
-                <input
-                  type="number"
-                  min="1"
-                  step="0.01"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                  placeholder="0"
-                  required
-                  dir="ltr"
-                />
+                <span>مبلغ التبرّع *</span>
+                <div className="field-row">
+                  <input
+                    type="number"
+                    min="1"
+                    step="0.01"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                    placeholder="0"
+                    required
+                    dir="ltr"
+                  />
+                  <select
+                    className="currency-select"
+                    value={currency}
+                    onChange={(e) => setCurrency(e.target.value)}
+                    aria-label="العملة"
+                  >
+                    {Object.entries(CURRENCIES).map(([code, c]) => (
+                      <option key={code} value={code}>
+                        {c.symbol} - {c.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </label>
 
               <label className="field">
@@ -158,7 +172,7 @@ export default function Admin({ user, onLogout }) {
                     <tr key={d.id}>
                       <td className="rank">{d.rank}</td>
                       <td>{d.name}</td>
-                      <td className="amount">{formatMoney(d.amount)}</td>
+                      <td className="amount">{formatAmount(d.amount, d.currency)}</td>
                       <td className="note-cell">{d.note || '—'}</td>
                       <td>
                         {confirmDelete === d.id ? (
