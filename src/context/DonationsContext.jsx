@@ -4,11 +4,9 @@ import { supabase, isConfigured } from '../lib/supabase'
 const DonationsContext = createContext(null)
 
 const PAGE_SIZE = 1000
-const EMPTY_TOTALS = { total_count: 0, syp: 0, usd: 0, sar: 0 }
 
 export function DonationsProvider({ children }) {
   const [donations, setDonations] = useState([])
-  const [totals, setTotals] = useState(EMPTY_TOTALS)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
@@ -42,21 +40,8 @@ export function DonationsProvider({ children }) {
     }
   }, [])
 
-  const fetchTotals = useCallback(async () => {
-    if (!isConfigured) return
-    try {
-      const { data, error } = await supabase.rpc('get_totals')
-      if (error) throw error
-      const row = Array.isArray(data) ? data[0] : data
-      if (row) setTotals(row)
-    } catch (e) {
-      console.error('تعذّر جلب الإجماليات:', e.message)
-    }
-  }, [])
-
   useEffect(() => {
     fetchDonations()
-    fetchTotals()
     if (!isConfigured) return
 
     const channel = supabase
@@ -66,7 +51,6 @@ export function DonationsProvider({ children }) {
         { event: 'INSERT', schema: 'public', table: 'donations' },
         (payload) => {
           setDonations((prev) => [payload.new, ...prev])
-          fetchTotals()
         },
       )
       .on(
@@ -74,7 +58,6 @@ export function DonationsProvider({ children }) {
         { event: 'DELETE', schema: 'public', table: 'donations' },
         (payload) => {
           setDonations((prev) => prev.filter((d) => d.id !== payload.old.id))
-          fetchTotals()
         },
       )
       .on(
@@ -84,7 +67,6 @@ export function DonationsProvider({ children }) {
           setDonations((prev) =>
             prev.map((d) => (d.id === payload.new.id ? payload.new : d)),
           )
-          fetchTotals()
         },
       )
       .subscribe()
@@ -92,7 +74,17 @@ export function DonationsProvider({ children }) {
     return () => {
       supabase.removeChannel(channel)
     }
-  }, [fetchDonations, fetchTotals])
+  }, [fetchDonations])
+
+  const totalSYP = donations
+    .filter((d) => (d.currency || 'SYP') === 'SYP')
+    .reduce((sum, d) => sum + Number(d.amount || 0), 0)
+  const totalUSD = donations
+    .filter((d) => d.currency === 'USD')
+    .reduce((sum, d) => sum + Number(d.amount || 0), 0)
+  const totalSAR = donations
+    .filter((d) => d.currency === 'SAR')
+    .reduce((sum, d) => sum + Number(d.amount || 0), 0)
 
   return (
     <DonationsContext.Provider
@@ -100,10 +92,10 @@ export function DonationsProvider({ children }) {
         donations,
         loading,
         error,
-        totalSYP: totals.syp,
-        totalUSD: totals.usd,
-        totalSAR: totals.sar,
-        totalCount: totals.total_count,
+        totalSYP,
+        totalUSD,
+        totalSAR,
+        totalCount: donations.length,
         refetch: fetchDonations,
       }}
     >
